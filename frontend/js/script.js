@@ -17,6 +17,14 @@ $("#searchForm").on( "submit", (event) => {
 
       // Append one item for each row in response
       res.map((item) => {
+
+         /** Displayed data:
+          *    IMAGE
+          *    TITLE AND LINK
+          *    RATING
+          *    AMOUT OF REVIEWS
+          */
+         // If rating or review not available -> don't display
          ul.append(`
             <li class="search-item list-group-item d-flex">
                <img src='${item.img}'>
@@ -30,5 +38,9 @@ $("#searchForm").on( "submit", (event) => {
             </li>
          `)
       })
+   })
+   .fail((err) => {
+      console.error(`AMAZON SCRAPER | Error ${err.status}: ${err.statusText}`);
+      alert("AN ERROR HAS OCCURRED!");
    })
 });
