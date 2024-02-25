@@ -3,6 +3,7 @@ const app = express();
 var cors = require('cors')
 
 const { fetchData } = require('./utils/dataFetcher');
+const { checkKeyword } = require('./middleware');
 
 app.use(express.json());
 app.use(cors())
@@ -12,7 +13,7 @@ app.listen('3000', () => {
 })
 
 // ROUTE TO GET PRODUCTS DATA
-app.get('/api/scrape', async (req, res) => {
+app.get('/api/scrape', checkKeyword, async (req, res) => {
    try {
       res.json(await fetchData(req.query.keyword))
    } catch ({response}) {

@@ -2,9 +2,16 @@
 $("#searchForm").on( "submit", (event) => {
    event.preventDefault();
 
-   $("#search-result").empty(); // Clear list on every search
-
    var keyword = $('#keyword').val().trim();
+
+   // Check if keyword is empty and reset value
+   if (keyword === "") {
+      alert("Keyword can't be empty!")
+      $('#keyword').val("")
+      return
+   }
+
+   $("#search-result").empty(); // Clear list on every search
 
    // AJAX request using JQUERY shorthand method
    $.get({
